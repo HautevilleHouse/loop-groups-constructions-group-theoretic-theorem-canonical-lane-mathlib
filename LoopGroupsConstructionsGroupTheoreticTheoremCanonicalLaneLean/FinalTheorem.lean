@@ -1,4 +1,6 @@
 import canonicalLaneMathlib.AdmissibleClass
+import LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean.BridgeLemmas
+import LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean.GateLemmas
 
 namespace HautevilleHouse
 namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
@@ -6,8 +8,7 @@ namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 def ConstrainedLoopGroupsClosure (A : AdmissibleClass) : Prop :=
   bridgeClosed A ∧ gateClosed A
 
-theorem constrained_loop_groups_endgame (A : AdmissibleClass) :
-    ConstrainedLoopGroupsClosure A := by
+theorem constrained_loop_groups_endgame (A : AdmissibleClass) : ConstrainedLoopGroupsClosure A := by
   exact And.intro (bridge_from_admissible_class A) (gate_from_admissible_class A)
 
 end LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
