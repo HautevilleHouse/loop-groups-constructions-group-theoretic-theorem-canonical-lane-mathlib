@@ -1,16 +1,16 @@
-import HautevilleHouse.LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean.MathlibObjects
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 
 structure AdmissibleClass where
-  object : LoopGroupsAdmittedObject
+  object : LoopGroupAdmittedObject
   endpointSatisfied : Prop
   remainderRecorded : Prop
   gateWitness : endpointSatisfied ∨ remainderRecorded
 
 def admittedClosure (A : AdmissibleClass) : Prop :=
-  LoopGroupsWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
+  LoopGroupWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
 
 end LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 end HautevilleHouse

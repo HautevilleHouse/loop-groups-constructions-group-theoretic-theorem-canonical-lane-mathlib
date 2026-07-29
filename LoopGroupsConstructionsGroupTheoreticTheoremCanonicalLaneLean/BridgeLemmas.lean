@@ -1,10 +1,10 @@
-import HautevilleHouse.LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean.Projection
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 
 def bridgeClosed (A : AdmissibleClass) : Prop :=
-  LoopGroupsWitnessClosed A.object
+  LoopGroupWitnessClosed A.object
 
 theorem bridge_from_admissible_class (A : AdmissibleClass) :
     bridgeClosed A := by
