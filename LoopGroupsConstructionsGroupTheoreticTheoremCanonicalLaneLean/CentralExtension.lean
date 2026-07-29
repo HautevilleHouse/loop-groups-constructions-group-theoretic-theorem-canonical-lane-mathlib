@@ -1,36 +1,30 @@
 import canonicalLaneMathlib.AdmissibleClass
 
-/-!
-# Central Extension Package
--/
-
 namespace HautevilleHouse
 namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 
-structure CentralExtensionPackage where
-  loopGroupType : Type u
-  centralExtension : Type v
-  cocycle : (loopGroupType × loopGroupType) → ℝ
-  cocycleSkewSymmetric : Prop
-  cocycleAdditive : Prop
-  extensionGroupLaw : Prop
-  extensionExactSequence : Prop
+structure CentralExtension (G : Type u) [Group G] (L : LoopGroup G) where
+  extensionGroup : Type u
+  extensionGroupStruct : Group extensionGroup
+  projectionMap : extensionGroup → L.carrier
+  kernelIsCentral : Prop
+  cocycleCondition : Prop
 
-structure CentralExtensionEvidence (C : CentralExtensionPackage) where
-  cocycleSkewSymmetricClosed : C.cocycleSkewSymmetric
-  cocycleAdditiveClosed : C.cocycleAdditive
-  extensionGroupLawClosed : C.extensionGroupLaw
-  extensionExactSequenceClosed : C.extensionExactSequence
+structure CentralExtensionConstruction {G : Type u} [Group G] {L : LoopGroup G} (E : CentralExtension G L) where
+  kernelEmbedding : Prop
+  cocycleTrivialization : Prop
+  projectiveRepresentation : Prop
 
-def CentralExtensionClosed (C : CentralExtensionPackage) : Prop :=
-  C.cocycleSkewSymmetric ∧ C.cocycleAdditive ∧
-  C.extensionGroupLaw ∧ C.extensionExactSequence
+structure CentralExtensionEvidence {G : Type u} [Group G] {L : LoopGroup G} {E : CentralExtension G L} (C : CentralExtensionConstruction E) where
+  kernelEmbeddingClosed : C.kernelEmbedding
+  cocycleTrivializationClosed : C.cocycleTrivialization
+  projectiveRepresentationClosed : C.projectiveRepresentation
 
-theorem central_extension_closed_from_evidence (C : CentralExtensionPackage)
-    (E : CentralExtensionEvidence C) : CentralExtensionClosed C := by
-  exact And.intro E.cocycleSkewSymmetricClosed
-    (And.intro E.cocycleAdditiveClosed
-      (And.intro E.extensionGroupLawClosed E.extensionExactSequenceClosed))
+def CentralExtensionClosed {G : Type u} [Group G] {L : LoopGroup G} {E : CentralExtension G L} (C : CentralExtensionConstruction E) : Prop :=
+  C.kernelEmbedding ∧ C.cocycleTrivialization ∧ C.projectiveRepresentation
+
+theorem central_extension_closed_from_evidence {G : Type u} [Group G] {L : LoopGroup G} {E : CentralExtension G L} (C : CentralExtensionConstruction E) (Ev : CentralExtensionEvidence C) : CentralExtensionClosed C := by
+  exact And.intro Ev.kernelEmbeddingClosed (And.intro Ev.cocycleTrivializationClosed Ev.projectiveRepresentationClosed)
 
 end LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 end HautevilleHouse
