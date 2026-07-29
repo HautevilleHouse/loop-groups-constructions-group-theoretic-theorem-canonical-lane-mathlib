@@ -3,28 +3,17 @@ import canonicalLaneMathlib.AdmissibleClass
 namespace HautevilleHouse
 namespace LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 
-structure CentralExtensionPackage where
-  group : Type u
-  centralExtension : Type v
+structure CentralExtension where
+  baseLoopGroup : Type u
+  extensionData : Type v
   cocycleCondition : Prop
-  groupLaw : Prop
-  extensionLaw : Prop
-  cocycleConditionTerm : cocycleCondition
-  groupLawTerm : groupLaw
-  extensionLawTerm : extensionLaw
+  extensionClosed : cocycleCondition
 
-structure CentralExtensionEvidence (P : CentralExtensionPackage) where
-  cocycleConditionClosed : P.cocycleCondition
-  groupLawClosed : P.groupLaw
-  extensionLawClosed : P.extensionLaw
+def CE_closure (C : CentralExtension) : Prop :=
+  C.cocycleCondition ∧ C.extensionClosed
 
-def CentralExtensionClosed (P : CentralExtensionPackage) : Prop :=
-  P.cocycleCondition ∧ P.groupLaw ∧ P.extensionLaw
-
-theorem central_extension_closed_from_evidence (P : CentralExtensionPackage)
-    (E : CentralExtensionEvidence P) : CentralExtensionClosed P := by
-  exact And.intro E.cocycleConditionClosed
-    (And.intro E.groupLawClosed E.extensionLawClosed)
+theorem CE_closure_from_structure (C : CentralExtension) : CE_closure C := by
+  exact And.intro C.cocycleCondition C.extensionClosed
 
 end LoopGroupsConstructionsGroupTheoreticTheoremCanonicalLaneLean
 end HautevilleHouse
